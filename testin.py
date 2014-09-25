@@ -123,11 +123,11 @@ def filter(device, apk, regex, text):
     if r:
         output = subprocess.check_output(['adb', '-s', device, 'shell', 'getprop', 'ro.product.model'], shell=False)
         output = output.strip()
-        log1 = str.format('[+]\t{0}:\t {1} Logcat output     ====>>>> [{2}ms]\n', output, apk, text)
+        log1 = str.format('[+]\t{0}:\t {1} Logcat output     ====>>>> [{2}]\n', output, apk, text)
         log2 = str.format('[+]\t{0}:\t {1} Display used time ====>>>> [{2}ms]\n', output, apk, r.group(1))
         print log1
         print log2
-        with open(output + '.log', 'w+') as fd:
+        with open(apk + '.log', 'a+') as fd:
             fd.write('\n' + log1 + log2 + '\n')
         
         
