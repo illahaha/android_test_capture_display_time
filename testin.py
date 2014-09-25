@@ -119,9 +119,12 @@ class testin(object):
            
 
 def filter(device, apk, regex, text):
+    output = subprocess.check_output(['adb', '-s', d, 'shell', 'getprop', 'ro.product.model'], shell=False)
     r = re.match(regex, text)
     if r:
-        print str.format('[+]\tin {0} {1} Display used time ***[{2}ms]*** and logcat[{3}]', device, apk, r.group(1), r.group(0))
+        print str.format('[+]\tin {0} {1} Logcat output     ====>>>> [{2}ms]', output, apk, r.group(0))
+        print str.format('[+]\tin {0} {1} Display used time ====>>>> [{2}ms]', output, apk, r.group(1))
+        
         
 def handler(signum, frame):
     if signum == 2:
